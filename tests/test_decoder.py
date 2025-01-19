@@ -1,5 +1,5 @@
 import unittest
-from decoder import message_setup, multiply_matrices, request_key, calculate_invertible, convert_message, convert_dec
+from decoder import message_setup, multiply_matrices, request_key, calculate_invertible, convert_message_to_dec, convert_dec
 
 
 class TestDecoder(unittest.TestCase):
@@ -14,15 +14,11 @@ class TestDecoder(unittest.TestCase):
         self.assertEqual(result, [[1, 0, 0], [-0.5, 0, 0.5], [0.5, 1, -1.5]])
         m_identity = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
         self.assertEqual(calculate_invertible(m_identity), m_identity)
-    
-    def test_request_message():
-        # assert is str
-        pass
 
     def test_convert_message(self):
-        self.assertEqual(convert_message('a'), [97])
-        self.assertEqual(convert_message('A'), [65])
-        self.assertEqual(convert_message('SŢÕVŝØOƙóMŢÏEŰá'), [83, 354, 213, 86, 349, 216, 79, 409, 243, 77, 354, 207, 69, 368, 225])
+        self.assertEqual(convert_message_to_dec('a'), [97])
+        self.assertEqual(convert_message_to_dec('A'), [65])
+        self.assertEqual(convert_message_to_dec('SŢÕVŝØOƙóMŢÏEŰá'), [83, 354, 213, 86, 349, 216, 79, 409, 243, 77, 354, 207, 69, 368, 225])
     
     def test_message_setup(self):
         message = [83, 354, 213, 86, 349, 216, 79, 409, 243, 77, 354, 207, 69, 368, 225]
