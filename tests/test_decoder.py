@@ -1,13 +1,37 @@
 import unittest
+from unittest.mock import patch
 from decoder import message_setup, multiply_matrices, request_key, calculate_invertible, convert_message_to_dec, convert_dec
 
 
 class TestDecoder(unittest.TestCase):
-    def test_request_key(self):
-        result = request_key(3)
-        self.assertEqual(len(result), 3)
-        # assert todas as len(list) dentro do Vetor == parâmetro
-        # assert all integers | float
+    @patch('builtins.input')
+    def test_request_key(self, mock_input):
+        # Mock para os inputs
+        n = 3
+        inputs = [
+            '1.0', '0.0', '0.0',
+            '1.0', '3.0', '1.0',
+            '1.0', '2.0', '0.0'
+        ]
+        mock_input.side_effect = inputs
+
+        result = request_key(n)
+        
+        expected = [
+            [1.0, 0.0, 0.0], 
+            [1.0, 3.0, 1.0], 
+            [1.0, 2.0, 0.0]
+        ]
+        
+        self.assertEqual(mock_input.call_count, 9)
+        self.assertEqual(len(result), n)
+        for row in result:
+            self.assertEqual(len(row), n)
+        for i in range(n):
+            for j in range(n):
+                self.assertEqual(result[i][j], expected[i][j])
+                self.assertIsInstance(result[i], list)
+                self.assertIsInstance(result[i][j], float)
     
     def test_calculate_invertible(self):
         result = calculate_invertible([[1, 0, 0], [1, 3, 1], [1, 2, 0]])
@@ -36,4 +60,8 @@ class TestDecoder(unittest.TestCase):
 
     def test_convert_dec(self):
         result = convert_dec([83, 65, 76, 86, 65, 68, 79, 82, 84, 77, 65, 82, 69, 78, 65])
-        self.assertEqual(result, "SALVADORTMARENA")
+        self.assertEqual(result, 'SALVADORTMARENA')
+
+
+if __name__ == "__main__":
+    unittest.main()
