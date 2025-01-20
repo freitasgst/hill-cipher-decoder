@@ -52,7 +52,7 @@ def convert_dec(message) -> str:
     return "".join(message)
 
 
-def main():
+def main():    # pragma: no cover
     n = int(input("Please, type the order of the matrix (key): "))
 
     encoder_key = request_key(n)
@@ -67,5 +67,5 @@ def main():
     print("The message is: ", decrypted_message_in_str)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":    # pragma: no cover
     main()
