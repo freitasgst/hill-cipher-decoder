@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from decoder import message_setup, multiply_matrices, request_key, calculate_invertible, convert_message_to_dec, convert_dec
+from decoder import arrange_dec_in_matrices, multiply_matrices, request_key, calculate_invertible, convert_message_to_dec, convert_dec_in_char
 
 
 class TestDecoder(unittest.TestCase):
@@ -44,10 +44,10 @@ class TestDecoder(unittest.TestCase):
         self.assertEqual(convert_message_to_dec('A'), [65])
         self.assertEqual(convert_message_to_dec('SŢÕVŝØOƙóMŢÏEŰá'), [83, 354, 213, 86, 349, 216, 79, 409, 243, 77, 354, 207, 69, 368, 225])
     
-    def test_message_setup(self):
+    def test_arrange_dec_in_matrices(self):
         message = [83, 354, 213, 86, 349, 216, 79, 409, 243, 77, 354, 207, 69, 368, 225]
         order = 3
-        result = message_setup(message, order)
+        result = arrange_dec_in_matrices(message, order)
         self.assertEqual(result, [[83, 354, 213], [86, 349, 216], [79, 409, 243], [77, 354, 207], [69, 368, 225]])
         self.assertEqual(len(result), len(message)/order)
         # assert parâmetros message % order == 0
@@ -58,8 +58,8 @@ class TestDecoder(unittest.TestCase):
         expected = [83, 65, 76, 86, 65, 68, 79, 82, 84, 77, 65, 82, 69, 78, 65]
         self.assertEqual(multiply_matrices(invertible, message), expected)
 
-    def test_convert_dec(self):
-        result = convert_dec([83, 65, 76, 86, 65, 68, 79, 82, 84, 77, 65, 82, 69, 78, 65])
+    def test_convert_dec_in_char(self):
+        result = convert_dec_in_char([83, 65, 76, 86, 65, 68, 79, 82, 84, 77, 65, 82, 69, 78, 65])
         self.assertEqual(result, 'SALVADORTMARENA')
 
 

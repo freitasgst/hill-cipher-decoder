@@ -23,7 +23,7 @@ def convert_message_to_dec(message: str) -> list[int]:
     return converted_message
 
 
-def message_setup(message: list[int], n: int) -> list[list[int]]:
+def arrange_dec_in_matrices(message: list[int], n: int) -> list[list[int]]:
     sublists = []
     sublist = []
     for i in message:
@@ -47,7 +47,7 @@ def multiply_matrices(invertible: list[list[float]], message: list[list[int]]) -
     return result
 
 
-def convert_dec(message) -> str:
+def convert_dec_in_char(message) -> str:
     message = [chr(num) for num in message]
     return "".join(message)
 
@@ -61,9 +61,9 @@ def main():    # pragma: no cover
     message = input("Type encrypted message: ")
     
     converted_to_dec_message = convert_message_to_dec(message)
-    converted_to_dec_message = message_setup(converted_to_dec_message, n)
+    converted_to_dec_message = arrange_dec_in_matrices(converted_to_dec_message, n)
     decrypted_message_in_dec = multiply_matrices(decoder_key, converted_to_dec_message)
-    decrypted_message_in_str = convert_dec(decrypted_message_in_dec)
+    decrypted_message_in_str = convert_dec_in_char(decrypted_message_in_dec)
     print("The message is: ", decrypted_message_in_str)
 
 
