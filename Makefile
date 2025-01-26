@@ -33,7 +33,8 @@ coverage: test .coverage
 	coverage report -m --fail-under=90
 
 lint:
-	ruff check --line-length=100 --target-version=py312 .
+	black --line-length=100 --target-version=py312 --check .
+	flake8 --max-line-length=100  --exclude .venv,dependencies
 
 format:
-	ruff format --line-length=100 --target-version=py312 .
+	black --line-length=100 --target-version=py312 .
