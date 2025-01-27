@@ -15,20 +15,12 @@ class TestDecoder(unittest.TestCase):
     def test_request_key(self, mock_input):
         # Mock para os inputs
         n = 3
-        inputs = [
-            "1.0", "0.0", "0.0",
-            "1.0", "3.0", "1.0",
-            "1.0", "2.0", "0.0"
-        ]
+        inputs = ["1.0", "0.0", "0.0", "1.0", "3.0", "1.0", "1.0", "2.0", "0.0"]
         mock_input.side_effect = inputs
 
         result = request_key(n)
 
-        expected = [
-            [1.0, 0.0, 0.0],
-            [1.0, 3.0, 1.0],
-            [1.0, 2.0, 0.0]
-        ]
+        expected = [[1.0, 0.0, 0.0], [1.0, 3.0, 1.0], [1.0, 2.0, 0.0]]
 
         self.assertEqual(mock_input.call_count, 9)
         self.assertEqual(len(result), n)
@@ -91,4 +83,4 @@ class TestDecoder(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main()  # pragma: no cover
